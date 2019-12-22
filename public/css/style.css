@@ -1,0 +1,76 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: monospace;
+  font-size: 12pt;
+}
+
+section {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 0;
+  align-items: center;
+  justify-content: center;
+}
+
+#foreground {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: url('https://cdn.glitch.com/afb4e21d-a522-44da-968a-450ee7cfed33%2Fpixelgrass.jpg?v=1576995002396');
+}
+
+.controls {
+  display: flex;
+  position: absolute;
+  justify-content: center;
+  align-items: center;
+}
+
+#action-controls,
+#movement-controls {
+  bottom: 0;
+  height: 100px;
+  width: 100%;
+  flex-direction: row;
+}
+
+#action-controls {
+  top: 0;
+}
+
+#action-controls button,
+#movement-controls button {
+  height: 50px;
+  width: 60px;
+  margin: 10px;
+}
+
+#world-container {
+  position: relative;
+}
+
+button {
+  background-color: #4285f4;
+  border: 2px solid #3652D3;
+  color: white;
+  font-family: monospace;
+  margin: 5px;
+  font-size: 24pt;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+}
+
+button:hover {
+  background-color: #3652D3;
+}
+
+p {
+  margin-top: 50px;
+  width: 80%;
+}
