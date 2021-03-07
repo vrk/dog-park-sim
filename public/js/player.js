@@ -28,12 +28,72 @@ class Player extends BasePlayer {
     }
   }
 
-  changeLook() {
-    this.selectedCharacter = (this.selectedCharacter + 1) % this.characters.length;
+  updateToBall(ballX, ballY) {
+    let deltaX = ballX - this.x;
+    let deltaY = ballY - this.y;
+    if (Math.abs(deltaX) < PLAYER_PX_UPDATES_PER_TICK) {
+      this.xVelocity = 0;
+      deltaX = 0;
+    }
+    if (Math.abs(deltaY) < PLAYER_PX_UPDATES_PER_TICK) {
+      this.yVelocity = 0;
+      deltaY = 0;
+    }
+
+    if (deltaX === 0 && deltaY === 0) {
+      this.sit();
+    } else {
+      if (deltaX < 0) {
+        this.direction = MOVE_LEFT;
+        this.xVelocity = -PLAYER_PX_UPDATES_PER_TICK;
+      } else if (deltaX > 0) {
+        this.direction = MOVE_RIGHT;
+        this.xVelocity = PLAYER_PX_UPDATES_PER_TICK;
+      }
+
+      if (deltaY < 0) {
+        this.direction = MOVE_UP;
+        this.yVelocity = -PLAYER_PX_UPDATES_PER_TICK;
+      } else if (deltaY > 0) {
+        this.direction = MOVE_DOWN;
+        this.yVelocity = PLAYER_PX_UPDATES_PER_TICK;
+      }
+    }
+
+    this.needsUpdate = true;
   }
 
-  sitRight() {
-    this.direction = SIT_RIGHT;
+  changeLook() {
+    this.selectedCharacter =
+      (this.selectedCharacter + 1) % this.characters.length;
+  }
+
+  sit() {
+    this.xVelocity = 0;
+    this.yVelocity = 0;
+    switch (this.direction) {
+      case MOVE_UP:
+      case MOVE_DOWN:
+      case STILL_UP:
+      case STILL_DOWN:
+        this.direction = SIT_DOWN;
+        break;
+      case MOVE_RIGHT:
+      case STILL_RIGHT:
+        this.direction = SIT_RIGHT;
+        break;
+      case MOVE_LEFT:
+      case STILL_LEFT:
+        this.direction = SIT_LEFT;
+        break;
+      default:
+        this.direction = SIT_DOWN;
+    }
+    this.needsUpdate = true;
+  }
+
+  sleep() {
+    this.direction = SLEEP;
     this.needsUpdate = true;
   }
 
@@ -62,7 +122,12 @@ class Player extends BasePlayer {
       this.arrowsPressed.push(key);
       this.direction = MOVE_UP;
     }
-    this.needsUpdate |= prevX !== this.x || prevY !== this.y || prevDir !== this.direction;
+    this.needsUpdate |=
+      prevX !== this.x || prevY !== this.y || prevDir !== this.direction;
+  }
+
+  isMoving() {
+    return this.arrowsPressed.length !== 0;
   }
 
   onKeyUp(event) {
@@ -70,10 +135,16 @@ class Player extends BasePlayer {
     this.arrowsPressed = this.arrowsPressed.filter(element => element !== key);
     const prevX = this.xVelocity;
     const prevY = this.yVelocity;
-    if (!this.arrowsPressed.includes('ArrowLeft') && !this.arrowsPressed.includes('ArrowRight')) {
+    if (
+      !this.arrowsPressed.includes('ArrowLeft') &&
+      !this.arrowsPressed.includes('ArrowRight')
+    ) {
       this.xVelocity = 0;
     }
-    if (!this.arrowsPressed.includes('ArrowDown') && !this.arrowsPressed.includes('ArrowUp')) {
+    if (
+      !this.arrowsPressed.includes('ArrowDown') &&
+      !this.arrowsPressed.includes('ArrowUp')
+    ) {
       this.yVelocity = 0;
     }
     this.needsUpdate |= prevX !== this.xVelocity || prevY !== this.yVelocity;

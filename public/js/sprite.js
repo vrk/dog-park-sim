@@ -1,4 +1,5 @@
 const BEATS_PER_FRAME = 10;
+const BEATS_PER_SLEEP = BEATS_PER_FRAME * 5;
 
 class Sprite {
   constructor(context, width, height, x, y, numberFrames, image) {
@@ -16,6 +17,13 @@ class Sprite {
   update() {
     this.tickCount++;
     if (this.tickCount % BEATS_PER_FRAME === 0) {
+      this.frameCount = (this.frameCount + 1) % this.totalFrames;
+    }
+  }
+
+  updateSleep() {
+    this.tickCount++;
+    if (this.tickCount % BEATS_PER_SLEEP === 0) {
       this.frameCount = (this.frameCount + 1) % this.totalFrames;
     }
   }

@@ -2,12 +2,20 @@ const DOG_SRCS = [
   'images/corgi.png',
   'images/bull-terrier.png',
   'images/chihuahua.png',
-  'images/cocker-spaniel-black-ribbon.png',
-  'images/cocker-spaniel.png',
-  'images/cocker-spaniel-dark-collar.png',
-  'images/japanese-chin.png',
+  'images/cocker-spaniel-black.png',
+  'images/cocker-spaniel-dark.png',
+  'images/cocker-spaniel-light.png',
+  'images/japanese-chin-dark.png',
+  'images/japanese-chin-light.png',
   'images/mastiff.png',
-  'images/pomeranian.png'
+  'images/pom.png',
+  'images/pom-small-black.png',
+  'images/pom-small-brown.png',
+  'images/pom-small-light.png',
+  'images/russian-wolfhound-brown.png',
+  'images/russian-wolfhound-white.png',
+  'images/russian-wolfhound-white-brown.png',
+  'images/corgi-small.png'
 ];
 
 function createDogSprites() {

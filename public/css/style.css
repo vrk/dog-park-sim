@@ -20,7 +20,7 @@ section {
   position: absolute;
   top: 0;
   left: 0;
-  background: url('https://cdn.glitch.com/afb4e21d-a522-44da-968a-450ee7cfed33%2Fpixelgrass.jpg?v=1576995002396');
+  background: url("https://cdn.glitch.com/afb4e21d-a522-44da-968a-450ee7cfed33%2Fpixelgrass.jpg?v=1576995002396");
 }
 
 .controls {
@@ -28,13 +28,13 @@ section {
   position: absolute;
   justify-content: center;
   align-items: center;
+  max-width: 90%;
 }
 
 #action-controls,
 #movement-controls {
   bottom: 0;
   height: 100px;
-  width: 100%;
   flex-direction: row;
 }
 
@@ -46,11 +46,14 @@ section {
 #movement-controls button {
   height: 50px;
   width: 60px;
-  margin: 10px;
+  padding: 0;
 }
 
 #world-container {
   position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 button {
@@ -64,13 +67,50 @@ button {
   justify-content: center;
   align-items: center;
   border-radius: 5px;
+  touch-action: manipulation;
 }
 
-button:hover {
+button.pressed {
   background-color: #3652D3;
 }
 
-p {
-  margin-top: 50px;
-  width: 80%;
+button:hover {
+  border: 2px solid white;
+}
+
+button:disabled,
+button:disabled:hover {
+  border: 2px solid #727272;
+  background-color: #B8B8B8;
+}
+
+#about h1, 
+#about p {
+  margin: 0.5em 1em;
+}
+
+#about {
+  z-index: 10;
+  border-radius: 10px;
+  background-color: #9588EA;
+  max-width: 90%;
+  width: 600px;
+  line-height: 1.6;
+  font-size: 16px;
+  padding: 10px;
+  color: white;
+  border: 2px solid #7263da;
+}
+
+#about h1 {
+  font-size: 1em;
+  text-align: center;
+}
+
+a, a:hover {
+  color: white;
+}
+
+a:hover {
+  text-decoration: none;
 }
